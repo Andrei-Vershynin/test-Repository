@@ -1,12 +1,17 @@
-import { Request, Response } from 'express';
+import { Request, Response, type RequestHandler } from 'express';
 import { Service } from '../../../services/post.types.ts';
 import { CreatePostDto, PostResponseDto } from '../../dto/post.dto.ts';
 import { ErrorResponseDto } from '../../dto/error.ts';
+import type { ParamsDictionary } from 'express-serve-static-core';
+import type { ParsedQs } from 'qs';
 
 
 const POSITIVE_INTEGER_REGEX = /^\d+$/;
 
 export interface PostHandlers {
+  create(arg0: string, requireAuth: RequestHandler<ParamsDictionary, any, any, ParsedQs, Record<string, any>>, create: any): unknown;
+  getById(arg0: string, getById: any): unknown;
+  getAll(arg0: string, getAll: any): unknown;
   getPostsHandler(
     req: Request,
     res: Response<PostResponseDto[] | ErrorResponseDto>
